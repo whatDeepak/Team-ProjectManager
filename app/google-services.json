@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "172035535541",
+    "project_id": "teamandroidapp-dde12",
+    "storage_bucket": "teamandroidapp-dde12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172035535541:android:54ac32efeb1fd2482c04fc",
+        "android_client_info": {
+          "package_name": "com.vyarth.team"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172035535541-5a4bm6koajclrvp05sn0s78mv84107sm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG3bDMOU1sDOKc6Crwhx4M7B4UK651UuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172035535541-5a4bm6koajclrvp05sn0s78mv84107sm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
