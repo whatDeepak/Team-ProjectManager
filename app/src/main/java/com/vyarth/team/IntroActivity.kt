@@ -8,7 +8,9 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.WindowManager
+import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 
 class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +27,20 @@ class IntroActivity : AppCompatActivity() {
         val typeface: Typeface = Typeface.createFromAsset(assets, "carbon bl.ttf")
         val tvAppNameIntro=findViewById<TextView>(R.id.tv_app_name_intro)
         tvAppNameIntro.typeface = typeface
+
+        val btnSignInIntro=findViewById<Button>(R.id.btn_sign_in_intro)
+        btnSignInIntro.setOnClickListener {
+
+            // Launch the sign in screen.
+            startActivity(Intent(this@IntroActivity, SignInActivity::class.java))
+        }
+
+        val btnSignUpIntro=findViewById<Button>(R.id.btn_sign_up_intro)
+        btnSignUpIntro.setOnClickListener {
+
+            // Launch the sign up screen.
+            startActivity(Intent(this@IntroActivity, SignUpActivity::class.java))
+        }
 
     }
 }
