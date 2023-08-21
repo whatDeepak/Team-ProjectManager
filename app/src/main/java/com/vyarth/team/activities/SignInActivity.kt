@@ -1,19 +1,16 @@
 package com.vyarth.team.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
 import com.vyarth.team.R
 
@@ -110,7 +107,7 @@ class SignInActivity : BaseActivity() {
     /**
      * A function to get the user details from the firestore database after authentication.
      */
-    fun signInSuccess(user: User) {
+    fun signInSuccess(user: com.vyarth.team.model.User?) {
 
         hideProgressDialog()
 
