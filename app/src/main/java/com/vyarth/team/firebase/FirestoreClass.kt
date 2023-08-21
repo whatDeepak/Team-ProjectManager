@@ -1,9 +1,11 @@
 package com.vyarth.team.firebase
 
+import android.app.Activity
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.vyarth.team.activities.MainActivity
 import com.vyarth.team.activities.SignInActivity
 import com.vyarth.team.activities.SignUpActivity
 import com.vyarth.team.model.User
@@ -39,7 +41,7 @@ class FirestoreClass {
             }
     }
 
-    fun signInUser(activity: SignInActivity){
+    fun signInUser(activity: Activity){
         mFireStore.collection(Constants.USERS)
             // Document ID for users fields. Here the document it is the User ID.
             .document(getCurrentUserID())
@@ -48,12 +50,27 @@ class FirestoreClass {
             .addOnSuccessListener {document->
                 val loggedInUser=document.toObject(User::class.java)
 
-                // Here call a function of base activity for transferring the result to it.
-                if(loggedInUser!=null)
-                    activity.signInSuccess(loggedInUser)
+                when(activity){
+                    is SignInActivity->{
+                        activity.signInSuccess(loggedInUser)
+                    }
+                    is MainActivity->{
+                        if (loggedInUser != null) {
+                            activity.updateNavigationUserDetails(loggedInUser)
+                        }
+                    }
+                }
             }
             .addOnFailureListener { e ->
-                activity.hideProgressDialog()
+                when(activity){
+                    is SignInActivity->{
+                        activity.hideProgressDialog()
+                    }
+                    is MainActivity->{
+                        activity.hideProgressDialog()
+                    }
+                }
+
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error writing document",
