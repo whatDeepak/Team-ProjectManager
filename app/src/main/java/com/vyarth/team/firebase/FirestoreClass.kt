@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.vyarth.team.activities.MainActivity
+import com.vyarth.team.activities.MyProfileActivity
 import com.vyarth.team.activities.SignInActivity
 import com.vyarth.team.activities.SignUpActivity
 import com.vyarth.team.model.User
@@ -41,39 +42,51 @@ class FirestoreClass {
             }
     }
 
-    fun signInUser(activity: Activity){
-        mFireStore.collection(Constants.USERS)
-            // Document ID for users fields. Here the document it is the User ID.
-            .document(getCurrentUserID())
-            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
-            .get()
-            .addOnSuccessListener {document->
-                val loggedInUser=document.toObject(User::class.java)
+    /**
+     * A function to SignIn using firebase and get the user details from Firestore Database.
+     */
+    fun loadUserData(activity: Activity, readBoardsList: Boolean = false) {
 
-                when(activity){
-                    is SignInActivity->{
+        // Here we pass the collection name from which we wants the data.
+        mFireStore.collection(Constants.USERS)
+            // The document id to get the Fields of user.
+            .document(getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(activity.javaClass.simpleName, document.toString())
+
+                // Here we have received the document snapshot which is converted into the User Data model object.
+                val loggedInUser = document.toObject(User::class.java)!!
+
+                // Here call a function of base activity for transferring the result to it.
+                when (activity) {
+                    is SignInActivity -> {
                         activity.signInSuccess(loggedInUser)
                     }
-                    is MainActivity->{
-                        if (loggedInUser != null) {
-                            activity.updateNavigationUserDetails(loggedInUser)
-                        }
+                    is MainActivity -> {
+                        activity.updateNavigationUserDetails(loggedInUser)
+                    }
+                    is MyProfileActivity -> {
+                        activity.setUserDataInUI(loggedInUser)
                     }
                 }
             }
             .addOnFailureListener { e ->
-                when(activity){
-                    is SignInActivity->{
+                // Here call a function of base activity for transferring the result to it.
+                when (activity) {
+                    is SignInActivity -> {
                         activity.hideProgressDialog()
                     }
-                    is MainActivity->{
+                    is MainActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                    is MyProfileActivity -> {
                         activity.hideProgressDialog()
                     }
                 }
-
                 Log.e(
                     activity.javaClass.simpleName,
-                    "Error writing document",
+                    "Error while getting loggedIn user details",
                     e
                 )
             }
