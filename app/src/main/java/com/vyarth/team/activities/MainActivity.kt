@@ -1,7 +1,9 @@
 package com.vyarth.team.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
@@ -70,8 +72,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             R.id.nav_my_profile -> {
-                startActivity(
-                    Intent(this@MainActivity, MyProfileActivity::class.java)
+                startActivityForResult(
+                    Intent(this@MainActivity, MyProfileActivity::class.java),
+                    MY_PROFILE_REQUEST_CODE
                 )
             }
 
@@ -115,5 +118,29 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Set the user name
         navUsername.text = user.name
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK
+            && requestCode == MY_PROFILE_REQUEST_CODE
+        ) {
+            // Get the user updated details.
+            FirestoreClass().loadUserData(this@MainActivity)
+        } else {
+            Log.e("Cancelled", "Cancelled")
+        }
+    }
+
+
+    /**
+     * A companion object to declare the constants.
+     */
+    companion object {
+        //A unique code for starting the activity for result
+        const val MY_PROFILE_REQUEST_CODE: Int = 11
+
+        const val CREATE_BOARD_REQUEST_CODE: Int = 12
     }
 }

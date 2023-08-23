@@ -35,6 +35,8 @@ class MyProfileActivity : BaseActivity() {
     private var mSelectedImageFileUri: Uri? = null
     // A global variable for a user profile image URL
     private var mProfileImageURL: String = ""
+    // A global variable for user details.
+    private lateinit var mUserDetails: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -197,11 +199,24 @@ class MyProfileActivity : BaseActivity() {
         }
 
         if (etMobile.text.toString() != mUserDetails.mobile.toString()) {
-            userHashMap[Constants.MOBILE] = et_mobile.text.toString().toLong()
+            userHashMap[Constants.MOBILE] = etMobile.text.toString().toLong()
         }
 
         // Update the data in the database.
         FirestoreClass().updateUserProfileData(this@MyProfileActivity, userHashMap)
+    }
+
+    /**
+     * A function to notify the user profile is updated successfully.
+     */
+    fun profileUpdateSuccess() {
+
+        hideProgressDialog()
+
+        Toast.makeText(this@MyProfileActivity, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
+
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 
 
@@ -232,5 +247,7 @@ class MyProfileActivity : BaseActivity() {
             }
         }
     }
+
+
 
 }
