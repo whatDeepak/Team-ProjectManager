@@ -27,7 +27,6 @@ class SplashActivity : AppCompatActivity() {
         tvAppName.typeface = typeface
 
         Handler().postDelayed({
-
             // Here if the user is signed in once and not signed out again from the app. So next time while coming into the app
             // we will redirect him to MainScreen or else to the Intro Screen as it was before.
 

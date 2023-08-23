@@ -95,8 +95,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
      * A function to get the current user details from firebase.
      */
     fun updateNavigationUserDetails(user: User) {
-
-
         // The instance of the header view of the navigation view.
         val navView=findViewById<NavigationView>(R.id.nav_view)
         val headerView = navView.getHeaderView(0)
