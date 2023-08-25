@@ -247,7 +247,4 @@ class MyProfileActivity : BaseActivity() {
             }
         }
     }
-
-
-
 }
