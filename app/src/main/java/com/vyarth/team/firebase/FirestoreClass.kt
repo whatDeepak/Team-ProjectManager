@@ -2,13 +2,16 @@ package com.vyarth.team.firebase
 
 import android.app.Activity
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.vyarth.team.activities.CreateBoardActivity
 import com.vyarth.team.activities.MainActivity
 import com.vyarth.team.activities.MyProfileActivity
 import com.vyarth.team.activities.SignInActivity
 import com.vyarth.team.activities.SignUpActivity
+import com.vyarth.team.model.Board
 import com.vyarth.team.model.User
 import com.vyarth.team.utils.Constants
 
@@ -142,6 +145,31 @@ class FirestoreClass {
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while creating a board.", e
+                )
+            }
+    }
+
+    /**
+     * A function for creating a board and making an entry in the database.
+     */
+    fun createBoard(activity: CreateBoardActivity, board: Board) {
+
+        mFireStore.collection(Constants.BOARDS)
+            .document()
+            .set(board, SetOptions.merge())
+            .addOnSuccessListener {
+                Log.e(activity.javaClass.simpleName, "Board created successfully.")
+
+                Toast.makeText(activity, "Board created successfully.", Toast.LENGTH_SHORT).show()
+
+                activity.boardCreatedSuccessfully()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while creating a board.",
+                    e
                 )
             }
     }

@@ -12,13 +12,18 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.vyarth.team.R
 import com.vyarth.team.firebase.FirestoreClass
 import com.vyarth.team.model.User
+import com.vyarth.team.utils.Constants
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    // A global variable for User Name
+    private lateinit var mUserName: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,6 +35,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         navView.setNavigationItemSelectedListener(this)
 
         FirestoreClass().loadUserData(this)
+
+        val fabCreateBoard=findViewById<FloatingActionButton>(R.id.fab_create_board)
+        fabCreateBoard.setOnClickListener {
+            val intent = Intent(this@MainActivity, CreateBoardActivity::class.java)
+            intent.putExtra(Constants.NAME, mUserName)
+            startActivityForResult(intent, CREATE_BOARD_REQUEST_CODE)
+        }
     }
 
     /**
@@ -98,6 +110,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
      * A function to get the current user details from firebase.
      */
     fun updateNavigationUserDetails(user: User) {
+
+        mUserName = user.name
         // The instance of the header view of the navigation view.
         val navView=findViewById<NavigationView>(R.id.nav_view)
         val headerView = navView.getHeaderView(0)
