@@ -141,8 +141,7 @@ class FirestoreClass {
 
                 Log.e(
                     activity.javaClass.simpleName,
-                    "Error while creating a board.",
-                    e
+                    "Error while creating a board.", e
                 )
             }
     }

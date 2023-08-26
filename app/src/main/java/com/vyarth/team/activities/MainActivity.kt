@@ -133,7 +133,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-
     /**
      * A companion object to declare the constants.
      */

@@ -89,6 +89,7 @@ class SignInActivity : BaseActivity() {
                 }
         }
     }
+
     /**
      * A function to validate the entries of a user.
      */

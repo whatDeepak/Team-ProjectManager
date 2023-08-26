@@ -178,7 +178,6 @@ class MyProfileActivity : BaseActivity() {
         }
     }
 
-
     /**
      * A function to update the user profile details into the database.
      */
@@ -218,7 +217,6 @@ class MyProfileActivity : BaseActivity() {
         setResult(Activity.RESULT_OK)
         finish()
     }
-
 
     /**
      * This function will identify the result of runtime permission after the user allows or deny permission based on the unique code.
