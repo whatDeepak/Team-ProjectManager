@@ -9,12 +9,14 @@ data class Board(
     val image: String = "",
     val createdBy: String = "",
     val assignedTo: ArrayList<String> = ArrayList(),
+    var documentId: String = "",
 ) : Parcelable {
     constructor(source: Parcel) : this(
         source.readString()!!,
         source.readString()!!,
         source.readString()!!,
         source.createStringArrayList()!!,
+        source.readString()!!,
 
     )
 
@@ -25,6 +27,7 @@ data class Board(
         writeString(image)
         writeString(createdBy)
         writeStringList(assignedTo)
+        writeString(documentId)
         
     }
 
