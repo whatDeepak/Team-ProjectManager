@@ -78,6 +78,7 @@ open class TaskListItemsAdapter(
         val ibDoneListName: ImageButton = holder.itemView.findViewById(R.id.ib_done_list_name)
         val ibEditListName: ImageButton = holder.itemView.findViewById(R.id.ib_edit_list_name)
         val etEditTaskListName: EditText = holder.itemView.findViewById(R.id.et_edit_task_list_name)
+        val etTaskListName: EditText = holder.itemView.findViewById(R.id.et_task_list_name)
         val llTitleView: LinearLayout = holder.itemView.findViewById(R.id.ll_title_view)
         val cvEditTaskListName: CardView = holder.itemView.findViewById(R.id.cv_edit_task_list_name)
         val ibCloseEditableView: ImageButton =
@@ -101,9 +102,9 @@ open class TaskListItemsAdapter(
                 tvAddTaskList.visibility = View.GONE
                 llTaskItem.visibility = View.VISIBLE
             }
-        }
-    }
-/**
+
+
+
             tvTaskListTitle.text = model.title
 
             tvAddTaskList.setOnClickListener {
@@ -112,13 +113,15 @@ open class TaskListItemsAdapter(
                 cvAddTaskListName.visibility = View.VISIBLE
             }
 
+
+
             ibCloseListName.setOnClickListener {
                 tvAddTaskList.visibility = View.VISIBLE
                 cvAddTaskListName.visibility = View.GONE
             }
 
             ibDoneListName.setOnClickListener {
-                val listName = etEditTaskListName.text.toString()
+                val listName = etTaskListName.text.toString()
 
                 if (listName.isNotEmpty()) {
                     // Here we check the context is an instance of the TaskListActivity.
@@ -185,21 +188,23 @@ open class TaskListItemsAdapter(
             }
 
             rvCardList.layoutManager = LinearLayoutManager(context)
-            rvCardListsetHasFixedSize(true)
+            rvCardList.setHasFixedSize(true)
 
             val adapter =
                 CardListItemsAdapter(context, model.cards)
             rvCardList.adapter = adapter
 
-            adapter.setOnClickListener(object :
-                CardListItemsAdapter.OnClickListener {
-                override fun onClick(cardPosition: Int) {
-                    if (context is TaskListActivity) {
-                        context.cardDetails(position, cardPosition)
-                    }
-                }
-            })
-
+//            adapter.setOnClickListener(object :
+//                CardListItemsAdapter.OnClickListener {
+//                override fun onClick(cardPosition: Int) {
+//                    if (context is TaskListActivity) {
+//                        context.cardDetails(position, cardPosition)
+//                    }
+//                }
+//            })
+        }
+    }
+/**
             /**
              * Creates a divider {@link RecyclerView.ItemDecoration} that can be used with a
              * {@link LinearLayoutManager}.
@@ -294,7 +299,6 @@ open class TaskListItemsAdapter(
         (this * Resources.getSystem().displayMetrics.density).toInt()
 
     /**
-    /**
      * Method is used to show the Alert Dialog for deleting the task list.
      */
     private fun alertDialogForDeleteList(position: Int, title: String) {
@@ -323,7 +327,6 @@ open class TaskListItemsAdapter(
         alertDialog.setCancelable(false) // Will not allow user to cancel after clicking on remaining screen area.
         alertDialog.show()  // show the dialog to UI
     }
-    */
 
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
