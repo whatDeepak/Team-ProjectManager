@@ -11,6 +11,7 @@ import com.vyarth.team.activities.MainActivity
 import com.vyarth.team.activities.MyProfileActivity
 import com.vyarth.team.activities.SignInActivity
 import com.vyarth.team.activities.SignUpActivity
+import com.vyarth.team.activities.TaskListActivity
 import com.vyarth.team.model.Board
 import com.vyarth.team.model.User
 import com.vyarth.team.utils.Constants
@@ -204,6 +205,28 @@ class FirestoreClass {
             }
             .addOnFailureListener { e ->
 
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
+            }
+    }
+
+    /**
+     * A function to get the Board Details.
+     */
+    fun getBoardDetails(activity: TaskListActivity, documentId: String) {
+        mFireStore.collection(Constants.BOARDS)
+            .document(documentId)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(activity.javaClass.simpleName, document.toString())
+
+                val board = document.toObject(Board::class.java)!!
+                board.documentId = document.id
+
+                // Send the result of board to the base activity.
+                activity.boardDetails(board)
+            }
+            .addOnFailureListener { e ->
                 activity.hideProgressDialog()
                 Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
             }
