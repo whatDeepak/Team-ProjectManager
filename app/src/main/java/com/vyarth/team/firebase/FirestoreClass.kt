@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.vyarth.team.activities.CardDetailsActivity
 import com.vyarth.team.activities.CreateBoardActivity
 import com.vyarth.team.activities.MainActivity
 import com.vyarth.team.activities.MembersActivity
@@ -249,10 +250,9 @@ class FirestoreClass {
 
                 if (activity is TaskListActivity) {
                     activity.addUpdateTaskListSuccess()
+                } else if (activity is CardDetailsActivity) {
+                    activity.addUpdateTaskListSuccess()
                 }
-//                } else if (activity is CardDetailsActivity) {
-//                    activity.addUpdateTaskListSuccess()
-//                }
             }
             .addOnFailureListener { e ->
                 if (activity is TaskListActivity) {

@@ -1,5 +1,6 @@
 package com.vyarth.team.activities
 
+import android.app.Activity
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -157,5 +158,12 @@ class MembersActivity : BaseActivity() {
         // START
         //SendNotificationToUserAsyncTask(mBoardDetails.name, user.fcmToken).execute()
         // END
+    }
+
+    override fun onBackPressed() {
+        if (anyChangesDone) {
+            setResult(Activity.RESULT_OK)
+        }
+        super.onBackPressed()
     }
 }

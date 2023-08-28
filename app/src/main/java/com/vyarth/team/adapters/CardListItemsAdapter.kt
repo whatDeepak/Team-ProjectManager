@@ -107,13 +107,12 @@ open class CardListItemsAdapter(
                     rvCardSelectedMembersList.visibility = View.GONE
                 }
             }
-
+*/
             holder.itemView.setOnClickListener {
                 if (onClickListener != null) {
                     onClickListener!!.onClick(position)
                 }
             }
-            */
         }
     }
 
