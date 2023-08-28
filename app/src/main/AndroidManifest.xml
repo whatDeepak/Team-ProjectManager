@@ -17,6 +17,10 @@
         android:theme="@style/Theme.Team"
         tools:targetApi="31">
         <activity
+            android:name=".activities.MembersActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
             android:name=".activities.TaskListActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
