@@ -105,15 +105,12 @@ class TaskListActivity : BaseActivity() {
         // Call the function to setup action bar.
         setupActionBar()
 
-        val addTaskList=Task(resources.getString(R.string.add_list))
-        board.taskList.add(addTaskList)
-
-        val rvTaskList=findViewById<RecyclerView>(R.id.rv_task_list)
-        rvTaskList.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
-        rvTaskList.setHasFixedSize(true)
-
-        val adapter=TaskListItemsAdapter(this, board.taskList)
-        rvTaskList.adapter=adapter
+        // Show the progress dialog.
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().getAssignedMembersListDetails(
+            this@TaskListActivity,
+            mBoardDetails.assignedTo
+        )
 
     }
 
@@ -237,6 +234,7 @@ class TaskListActivity : BaseActivity() {
         intent.putExtra(Constants.BOARD_DETAIL, mBoardDetails)
         intent.putExtra(Constants.TASK_LIST_ITEM_POSITION, taskListPosition)
         intent.putExtra(Constants.CARD_LIST_ITEM_POSITION, cardPosition)
+        intent.putExtra(Constants.BOARD_MEMBERS_LIST, mAssignedMembersDetailList)
         startActivityForResult(intent, CARD_DETAILS_REQUEST_CODE)
     }
 

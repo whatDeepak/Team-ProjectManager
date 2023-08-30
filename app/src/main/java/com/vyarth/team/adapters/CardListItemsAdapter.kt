@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vyarth.team.R
 import com.vyarth.team.activities.TaskListActivity
 import com.vyarth.team.model.Card
+import com.vyarth.team.model.SelectedMembers
 
 open class CardListItemsAdapter(
     private val context: Context,
@@ -71,7 +72,6 @@ open class CardListItemsAdapter(
                 }
             }
 
-            /**
             if ((context as TaskListActivity).mAssignedMembersDetailList.size > 0) {
                 // A instance of selected members list.
                 val selectedMembersList: ArrayList<SelectedMembers> = ArrayList()
@@ -89,7 +89,7 @@ open class CardListItemsAdapter(
                         }
                     }
                 }
-z
+
                 if (selectedMembersList.size > 0) {
 
                     if (selectedMembersList.size == 1 && selectedMembersList[0].id == model.createdBy) {
@@ -114,8 +114,6 @@ z
                     rvCardSelectedMembersList.visibility = View.GONE
                 }
             }
-*/
-
         }
     }
 
