@@ -257,7 +257,7 @@ class FirestoreClass {
             .addOnFailureListener { e ->
                 if (activity is TaskListActivity) {
                     activity.hideProgressDialog()
-                } else if (activity is TaskListActivity) {
+                } else if (activity is CardDetailsActivity) {
                     activity.hideProgressDialog()
                 }
                 Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)

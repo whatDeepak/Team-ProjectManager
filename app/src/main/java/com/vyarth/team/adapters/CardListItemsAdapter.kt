@@ -56,12 +56,12 @@ open class CardListItemsAdapter(
 
         if (holder is MyViewHolder) {
 
-//            if (model.labelColor.isNotEmpty()) {
-//                viewLabelColor.visibility = View.VISIBLE
-//                viewLabelColor.setBackgroundColor(Color.parseColor(model.labelColor))
-//            } else {
-//                viewLabelColor.visibility = View.GONE
-//            }
+            if (model.labelColor.isNotEmpty()) {
+                viewLabelColor.visibility = View.VISIBLE
+                viewLabelColor.setBackgroundColor(Color.parseColor(model.labelColor))
+            } else {
+                viewLabelColor.visibility = View.GONE
+            }
 
             tvCardName.text = model.name
 

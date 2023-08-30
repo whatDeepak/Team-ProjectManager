@@ -1,16 +1,19 @@
 package com.vyarth.team.activities
 
 import android.app.Activity
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.Toolbar
 import com.vyarth.team.R
+import com.vyarth.team.dialogs.LabelColorListDialog
 import com.vyarth.team.firebase.FirestoreClass
 import com.vyarth.team.model.Board
 import com.vyarth.team.model.Card
@@ -42,9 +45,15 @@ class CardDetailsActivity : BaseActivity() {
 
         val etNameCardDetails = findViewById<AppCompatEditText>(R.id.et_name_card_details)
         val btnUpdateCardDetails = findViewById<Button>(R.id.btn_update_card_details)
+        val tvSelectLabelColor=findViewById<TextView>(R.id.tv_select_label_color)
 
         etNameCardDetails.setText(mBoardDetails.taskList[mTaskListPosition].cards[mCardPosition].name)
         etNameCardDetails.setSelection(etNameCardDetails.text.toString().length) // The cursor after the string length
+
+        mSelectedColor = mBoardDetails.taskList[mTaskListPosition].cards[mCardPosition].labelColor
+        if (mSelectedColor.isNotEmpty()) {
+            setColor()
+        }
 
         btnUpdateCardDetails.setOnClickListener {
             if (etNameCardDetails.text.toString().isNotEmpty()) {
@@ -54,6 +63,11 @@ class CardDetailsActivity : BaseActivity() {
                     .show()
             }
         }
+
+        tvSelectLabelColor.setOnClickListener {
+            labelColorsListDialog()
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -198,4 +212,51 @@ class CardDetailsActivity : BaseActivity() {
         alertDialog.show()  // show the dialog to UI
     }
 
+    /**
+     * A function to add some static label colors in the list.
+     */
+    private fun colorsList(): ArrayList<String> {
+
+        val colorsList: ArrayList<String> = ArrayList()
+        colorsList.add("#43C86F")
+        colorsList.add("#0C90F1")
+        colorsList.add("#F72400")
+        colorsList.add("#7A8089")
+        colorsList.add("#D57C1D")
+        colorsList.add("#770000")
+        colorsList.add("#0022F8")
+
+        return colorsList
+    }
+
+    /**
+     * A function to remove the text and set the label color to the TextView.
+     */
+    private fun setColor() {
+        val tvSelectLabelColor=findViewById<TextView>(R.id.tv_select_label_color)
+
+        tvSelectLabelColor.text = ""
+        tvSelectLabelColor.setBackgroundColor(Color.parseColor(mSelectedColor))
+    }
+
+    /**
+     * A function to launch the label color list dialog.
+     */
+    private fun labelColorsListDialog() {
+
+        val colorsList: ArrayList<String> = colorsList()
+
+        val listDialog = object : LabelColorListDialog(
+            this@CardDetailsActivity,
+            colorsList,
+            resources.getString(R.string.str_select_label_color),
+            mSelectedColor
+        ) {
+            override fun onItemSelected(color: String) {
+                mSelectedColor = color
+                setColor()
+            }
+        }
+        listDialog.show()
+    }
 }
