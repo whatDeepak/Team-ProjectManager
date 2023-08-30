@@ -124,16 +124,16 @@ class FirestoreClass {
             .addOnSuccessListener {
                 Log.e(activity.javaClass.simpleName, "Data updated successfully!")
 
-//                // Notify the success result.
-//
-//                when (activity) {
-//                    is MainActivity -> {
-//                        activity.tokenUpdateSuccess()
-//                    }
-//                    is MyProfileActivity -> {
-//                        activity.profileUpdateSuccess()
-//                    }
-//                }
+                // Notify the success result.
+
+                when (activity) {
+                    is MainActivity -> {
+                        activity.tokenUpdateSuccess()
+                    }
+                    is MyProfileActivity -> {
+                        activity.profileUpdateSuccess()
+                    }
+                }
             }
             .addOnFailureListener { e ->
                 when (activity) {
