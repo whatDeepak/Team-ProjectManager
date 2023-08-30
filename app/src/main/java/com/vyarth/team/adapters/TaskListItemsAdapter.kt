@@ -202,9 +202,7 @@ open class TaskListItemsAdapter(
                     }
                 }
             })
-        }
-    }
-/**
+
             /**
              * Creates a divider {@link RecyclerView.ItemDecoration} that can be used with a
              * {@link LinearLayoutManager}.
@@ -277,7 +275,7 @@ open class TaskListItemsAdapter(
             helper.attachToRecyclerView(rvCardList)
         }
     }
-    */
+
 
     /**
      * Gets the number of items in the list

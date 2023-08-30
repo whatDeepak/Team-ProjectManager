@@ -239,6 +239,21 @@ class TaskListActivity : BaseActivity() {
     }
 
     /**
+     * A function to update the card list in the particular task list.
+     */
+    fun updateCardsInTaskList(taskListPosition: Int, cards: ArrayList<Card>) {
+
+        // Remove the last item
+        mBoardDetails.taskList.removeAt(mBoardDetails.taskList.size - 1)
+
+        mBoardDetails.taskList[taskListPosition].cards = cards
+
+        // Show the progress dialog.
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().addUpdateTaskList(this@TaskListActivity, mBoardDetails)
+    }
+
+    /**
      * A companion object to declare the constants.
      */
     companion object {
