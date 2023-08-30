@@ -49,20 +49,27 @@ open class CardListItemsAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
 
+        val tvCardName: TextView = holder.itemView.findViewById(R.id.tv_card_name)
         val viewLabelColor: View = holder.itemView.findViewById<View>(R.id.view_label_color)
-        val tvCardName: TextView = holder.itemView.findViewById<TextView>(R.id.tv_card_name)
+
         val rvCardSelectedMembersList: RecyclerView = holder.itemView.findViewById<RecyclerView>(R.id.rv_card_selected_members_list)
 
         if (holder is MyViewHolder) {
 
-            if (model.labelColor.isNotEmpty()) {
-                viewLabelColor.visibility = View.VISIBLE
-                viewLabelColor.setBackgroundColor(Color.parseColor(model.labelColor))
-            } else {
-                viewLabelColor.visibility = View.GONE
-            }
+//            if (model.labelColor.isNotEmpty()) {
+//                viewLabelColor.visibility = View.VISIBLE
+//                viewLabelColor.setBackgroundColor(Color.parseColor(model.labelColor))
+//            } else {
+//                viewLabelColor.visibility = View.GONE
+//            }
 
             tvCardName.text = model.name
+
+            holder.itemView.setOnClickListener {
+                if (onClickListener != null) {
+                    onClickListener!!.onClick(position)
+                }
+            }
 
             /**
             if ((context as TaskListActivity).mAssignedMembersDetailList.size > 0) {
@@ -82,7 +89,7 @@ open class CardListItemsAdapter(
                         }
                     }
                 }
-
+z
                 if (selectedMembersList.size > 0) {
 
                     if (selectedMembersList.size == 1 && selectedMembersList[0].id == model.createdBy) {
@@ -108,11 +115,7 @@ open class CardListItemsAdapter(
                 }
             }
 */
-            holder.itemView.setOnClickListener {
-                if (onClickListener != null) {
-                    onClickListener!!.onClick(position)
-                }
-            }
+
         }
     }
 
@@ -134,7 +137,7 @@ open class CardListItemsAdapter(
      * An interface for onclick items.
      */
     interface OnClickListener {
-        fun onClick(cardPosition: Int)
+        fun onClick(position: Int)
     }
 
     /**

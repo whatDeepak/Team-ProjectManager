@@ -100,13 +100,12 @@ class CardDetailsActivity : BaseActivity() {
         if (intent.hasExtra(Constants.CARD_LIST_ITEM_POSITION)) {
             mCardPosition = intent.getIntExtra(Constants.CARD_LIST_ITEM_POSITION, -1)
         }
-//        if (intent.hasExtra(Constants.BOARD_DETAIL)) {
-//            mBoardDetails = intent.getParcelableExtra(Constants.BOARD_DETAIL) as Board
-//        }
-
-        if (intent.hasExtra(Constants.BOARD_MEMBERS_LIST)) {
-            mMembersDetailList = intent.getParcelableArrayListExtra(Constants.BOARD_MEMBERS_LIST)!!
+        if (intent.hasExtra(Constants.BOARD_DETAIL)) {
+            mBoardDetails = intent.getParcelableExtra(Constants.BOARD_DETAIL)!!
         }
+//        if (intent.hasExtra(Constants.BOARD_MEMBERS_LIST)) {
+//            mMembersDetailList = intent.getParcelableArrayListExtra(Constants.BOARD_MEMBERS_LIST)!!
+//        }
     }
 
     /**

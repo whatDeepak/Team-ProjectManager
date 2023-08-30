@@ -288,10 +288,9 @@ class FirestoreClass {
 
                 if (activity is MembersActivity) {
                     activity.setupMembersList(usersList)
+                } else if (activity is TaskListActivity) {
+                    activity.boardMembersDetailList(usersList)
                 }
-//                } else if (activity is TaskListActivity) {
-//                    activity.boardMembersDetailList(usersList)
-//                }
             }
             .addOnFailureListener { e ->
                 if (activity is MembersActivity) {

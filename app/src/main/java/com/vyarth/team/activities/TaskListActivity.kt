@@ -237,8 +237,7 @@ class TaskListActivity : BaseActivity() {
         intent.putExtra(Constants.BOARD_DETAIL, mBoardDetails)
         intent.putExtra(Constants.TASK_LIST_ITEM_POSITION, taskListPosition)
         intent.putExtra(Constants.CARD_LIST_ITEM_POSITION, cardPosition)
-        //intent.putExtra(Constants.BOARD_MEMBERS_LIST, mAssignedMembersDetailList)
-        startActivity(intent)
+        startActivityForResult(intent, CARD_DETAILS_REQUEST_CODE)
     }
 
     /**
